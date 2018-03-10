@@ -13,7 +13,10 @@
 
 Route::get('/', 'Dashboard@index');
 Route::get('/home', 'Dashboard@index')->name('home');
-Route::get('/policy/create', 'Policy\Create@showForm');
+Route::get('/policy/create', 'Policy\CreateController@showForm');
+Route::get('/policy/types', 'Policy\TypeController@index');
+Route::post('/policy/types', 'Policy\TypeController@types');
+Route::post('/policy/types/{policy_type}/delete', 'Policy\TypeController@delete');
 Auth::routes();
 
 

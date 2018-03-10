@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Policy;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Create extends Controller
+class CreateController extends Controller
 {
     public function __construct()
     {
@@ -16,6 +16,18 @@ class Create extends Controller
     {
         return view('policy.create');
     }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public function create(Request $request)
+    {
+	   return response()->ajax('Policy Type ('.$policyType->name.') Deleted');
+
+    }
+    
 
 
 }

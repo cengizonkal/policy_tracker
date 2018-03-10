@@ -11,7 +11,7 @@
                     <!-- Credit Card -->
                     <div id="pay-invoice">
                         <div class="card-body">
-                            <form action="" method="post" novalidate="novalidate">
+                            <form action="{{url('policy/create')}}" method="post" novalidate="novalidate">
                                 <fieldset>
                                     <legend>Müşteri</legend>
                                     <hr>
