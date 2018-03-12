@@ -42,7 +42,7 @@ class CreateController extends Controller
             ]);
 
             \DB::commit();
-            return redirect('policy/' . $policy->id . '/details');
+            return redirect('policy/' . $policy->id . '/items');
         } catch (\Exception $e) {
             \DB::rollBack();
             throw $e;
@@ -53,19 +53,28 @@ class CreateController extends Controller
 
     public function items(Policy $policy)
     {
-        return view('policy.items')->with('policy', $policy);
+        return view('policy.items')
+            ->with('policy', $policy);
     }
+
 
     public function saveItems(Policy $policy, CreateItemRequest $createItemRequest)
     {
 
+
         $item = new Item();
         $item->policy_id = $policy->id;
         $item->description = $createItemRequest->get('description');
+        $item->price = $createItemRequest->get('price');
+        $features = [];
         foreach ($policy->policy_type->features as $feature => $feature_type) {
-            $item->features[$feature] = $createItemRequest->get($feature);
+            $features[$feature] = $createItemRequest->get($feature);
+        }
+        if (!empty($features)) {
+            $item->features = $features;
         }
         $item->save();
+        return redirect('policy/' . $policy->id . '/items');
 
     }
 
