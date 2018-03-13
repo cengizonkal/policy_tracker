@@ -49,7 +49,7 @@
                     <div class="card-footer ">
                         <div class="pull-right">
                             <button type="submit" class="btn btn-success btn-sm">
-                                <i class="fa fa-check"></i> Submit
+                                <i class="fa fa-check"></i> Oluştur
                             </button>
                         </div>
                     </div>

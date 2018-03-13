@@ -24,7 +24,8 @@
                         <div class="row form-group">
                             <div class="col col-md-3"><label
                                         class=" form-control-label">Fiyat</label></div>
-                            <div class="col-12 col-md-9"><input name="price" type="number" id="text-input" class="form-control">
+                            <div class="col-12 col-md-9"><input name="price" type="number" id="text-input"
+                                                                class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -63,7 +64,11 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Fiyat</th>
+                    <th>Açıklama</th>
+                    @foreach($policy->policy_type->features as $feature => $feature_type)
+                        <th>{{$feature}}</th>
+                    @endforeach
                     <th></th>
 
                 </tr>
@@ -79,6 +84,11 @@
             "columns": [
                 {"data": "id"},
                 {"data": "price"},
+                {"data": "description"},
+                @foreach($policy->policy_type->features as $feature => $feature_type)
+                {"data": "features.{{$feature}}"},
+                @endforeach
+
                 {
                     data: null,
                     "orderable": false,
