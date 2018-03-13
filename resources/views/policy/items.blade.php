@@ -86,14 +86,14 @@
                 {"data": "price"},
                 {"data": "description"},
                 @foreach($policy->policy_type->features as $feature => $feature_type)
-                {"data": "features.{{$feature}}"},
+                {"data": "features.{{$feature}}", "defaultContent":"-"},
                 @endforeach
 
                 {
                     data: null,
                     "orderable": false,
                     render: function (data, type, row) {
-                        return '<button class="btn btn-sm btn-danger" onclick="deleteType(' + data.id + ')">Delete</button>';
+                        return '<button class="btn btn-sm btn-danger" onclick="deleteType(' + data.id + ')">Sil</button>';
                     }
                 }
             ],
