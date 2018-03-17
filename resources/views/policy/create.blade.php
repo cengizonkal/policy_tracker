@@ -27,6 +27,16 @@
                                         <input name="last_name" type="text" class="form-control" required
                                                placeholder="Müşteri Soyadı"/>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label mb-1">Email</label>
+                                        <input name="email" type="email" class="form-control" required
+                                               placeholder="Email"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label mb-1">Telefon</label>
+                                        <input name="phone" type="text" class="form-control" required
+                                               placeholder="Telefon"/>
+                                    </div>
                                 </fieldset>
                                 <fieldset>
                                     <legend>Poliçe Türü</legend>

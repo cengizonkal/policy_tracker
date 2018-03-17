@@ -34,6 +34,9 @@ class CreateController extends Controller
             $customer = new Customer();
             $customer->first_name = $policyRequest->get('first_name');
             $customer->last_name = $policyRequest->get('last_name');
+            $customer->email = $policyRequest->get('email');
+            $customer->phone = $policyRequest->get('phone');
+
             $customer->save();
 
             /** @var Policy $policy */
@@ -62,18 +65,29 @@ class CreateController extends Controller
     {
 
 
-        $item = new Item();
-        $item->policy_id = $policy->id;
-        $item->description = $createItemRequest->get('description');
-        $item->price = $createItemRequest->get('price');
-        $features = [];
-        foreach ($policy->policy_type->features as $feature => $feature_type) {
-            $features[$feature] = $createItemRequest->get($feature);
+        try {
+            \DB::beginTransaction();
+            $item = new Item();
+
+            $item->policy_id = $policy->id;
+            $item->description = $createItemRequest->get('description');
+            $item->price = $createItemRequest->get('price');
+            $features = [];
+            foreach ($policy->policy_type->features as $feature => $feature_type) {
+                $features[$feature] = $createItemRequest->get($feature);
+            }
+            if (!empty($features)) {
+                $item->features = $features;
+            }
+            $item->save();
+            $policy->customer->accountingRecords()->create([
+                'debt' => $createItemRequest->get('price')
+            ]);
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            throw $e;
         }
-        if (!empty($features)) {
-            $item->features = $features;
-        }
-        $item->save();
         return redirect('policy/' . $policy->id . '/items');
 
     }

@@ -1,0 +1,58 @@
+@extends('layouts.app')
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="customers" class="table" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>Toplam Poliçe Sayısı</th>
+                    <th>Bakiye</th>
+                    <th></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        typesTable = $('#customers').DataTable({
+            dom: 'Bfrtip',
+            "data": {!! $customers !!},
+            "columns": [
+                {"data": "id"},
+                {"data": "first_name"},
+                {"data": "last_name"},
+                {"data": "policy_count"},
+                {"data": "balance"},
+                {
+                    data: null,
+                    "orderable": false,
+                    render: function (data, type, row) {
+                        return `<div class="dropdown">
+                            <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button"  data-toggle="dropdown"  >
+                            <span class="ti-menu"></span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/policies')+`">Poliçeler</a>
+                            <a class="dropdown-item" href="#">Muhasebe</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Güncelle</a>
+                            <a class="dropdown-item" href="#">Sil</a>
+                        </div>
+                        </div>`;
+                    }
+                }
+            ],
+            "buttons": [
+                'copy', 'excel', 'pdf'
+            ]
+        });
+
+
+    </script>
+@stop
+

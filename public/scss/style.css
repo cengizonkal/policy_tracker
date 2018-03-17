@@ -1257,7 +1257,7 @@ header .form-inline {
       .header-left .dropdown .dropdown-menu .dropdown-item:hover {
         background: transparent; }
 
-.dropdown-menu {
+.user-area>.dropdown-menu {
   border-radius: 0;
   transform: none !important; }
 

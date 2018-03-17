@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
  * Class Policy
  * @property mixed id
  * @property PolicyType policy_type
+ * @property Customer customer
  * @package App\Models
  */
 class Policy extends Model
 {
 
     protected $fillable = ['policy_type_id'];
+    protected $appends=['total_price'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -23,7 +25,7 @@ class Policy extends Model
         return $this->hasMany('\App\Models\Item');
     }
 
-    public function policy_type()
+    public function policyType()
     {
         return $this->belongsTo('\App\Models\PolicyType');
     }
@@ -31,5 +33,11 @@ class Policy extends Model
     public function customer()
     {
         return $this->belongsTo('\App\Models\Customer');
+    }
+
+    public function getTotalPriceAttribute()
+    {
+
+        return $this->items()->sum('price');
     }
 }

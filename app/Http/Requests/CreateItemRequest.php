@@ -24,7 +24,7 @@ class CreateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'price'=>'required'
+            'price'=>'required|numeric'
         ];
     }
 }
