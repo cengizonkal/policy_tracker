@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccountingRecord extends Model
 {
-    //
+    protected $fillable=['debt','credit','description'];
 }

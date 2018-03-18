@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed phone
  * @property AccountingRecord[] accountingRecords
  * @property Policy[] policies
+ * @property int id
  */
 class Customer extends Model
 {

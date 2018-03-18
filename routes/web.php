@@ -25,6 +25,8 @@ Route::get('/policy/list', 'Policy\ListController@index');
 
 Route::get('/customer/list', 'Customer\CustomerController@index');
 Route::get('/customer/{customer}/policies', 'Customer\CustomerController@policies');
+Route::get('/customer/{customer}/accounting', 'Customer\AccountingController@index');
+Route::get('/customer/{customer}/accounting/add', 'Customer\AccountingController@add');
 
 Route::get('/policy/types', 'Policy\TypeController@index');
 Route::post('/policy/types', 'Policy\TypeController@types');
