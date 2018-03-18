@@ -10,7 +10,7 @@
                 <th>Soyadı</th>
                 <th>Poliçe Türü</th>
                 <th>Poliçe Tutarı</th>
-
+                <th>Bitiş Tarihi</th>
                 <th></th>
             </tr>
             </thead>
@@ -28,7 +28,9 @@
                 {"data": "customer.first_name"},
                 {"data": "customer.last_name"},
                 {"data": "policy_type.name"},
+
                 {"data": "total_price"},
+                {"data": "end_at"},
                 {
                     data: null,
                     "orderable": false,

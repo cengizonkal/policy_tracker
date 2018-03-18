@@ -15,11 +15,9 @@ class Policy extends Model
 {
 
     protected $fillable = ['policy_type_id'];
-    protected $appends=['total_price'];
+    protected $appends = ['total_price'];
+    protected $dates = ['end_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function items()
     {
         return $this->hasMany('\App\Models\Item');

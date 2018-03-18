@@ -39,7 +39,7 @@
                     <th>ID</th>
                     <th>Poliçe Türü</th>
                     <th>Poliçe Tutarı</th>
-
+                    <th>Bitiş Tarihi</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -56,6 +56,7 @@
                 {"data": "id"},
                 {"data": "policy_type.name"},
                 {"data": "total_price"},
+                {"data":"end_at"},
                 {
                     data: null,
                     "orderable": false,
