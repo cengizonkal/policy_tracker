@@ -91,7 +91,14 @@
                     data: null,
                     "orderable": false,
                     render: function (data, type, row) {
-                        return '<button class="btn btn-sm btn-danger" onclick="deleteType(' + data.id + ')">Sil</button>';
+                        return `<div class="dropdown">
+                            <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button"  data-toggle="dropdown"  >
+                            <span class="ti-menu"></span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/policies')+`">Sil</a>
+                        </div>
+                        </div>`;
                     }
                 }
             ],
