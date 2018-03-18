@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,7 +17,8 @@ class Policy extends Model
 
     protected $fillable = ['policy_type_id'];
     protected $appends = ['total_price'];
-    protected $dates = ['end_at'];
+    protected $dates = ['valid_until'];
+
 
     public function items()
     {
@@ -35,7 +37,11 @@ class Policy extends Model
 
     public function getTotalPriceAttribute()
     {
-
         return $this->items()->sum('price');
     }
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format( 'd-m-Y H:i:s'); // Use your own format here
+    }
+
 }

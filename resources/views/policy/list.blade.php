@@ -30,7 +30,7 @@
                 {"data": "policy_type.name"},
 
                 {"data": "total_price"},
-                {"data": "end_at"},
+                {"data": "valid_until"},
                 {
                     data: null,
                     "orderable": false,
