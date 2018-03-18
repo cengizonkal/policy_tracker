@@ -1,33 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
-        <div class="col-lg-6">
-        <section class="card">
-            <div class="card-header user-header alt bg-dark">
-                <div class="media">
-                    <div class="media-body">
-                        <h2 class="text-light display-6">{{$customer->full_name}}</h2>
-                        <p>{{$customer->phone}}</p><p> {{$customer->email}}</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <i class="fa fa-minus"></i> Toplam Borç <span class="badge badge-secondary pull-right">{{$customer->total_debt}}</span>
-                </li>
-                <li class="list-group-item">
-                    <i class="fa fa-plus"></i> Toplam Alacak <span class="badge badge-danger pull-right">{{$customer->total_credit}}</span>
-                </li>
-                <li class="list-group-item">
-                    <i class="fa fa-money"></i> Bakiye <span class="badge badge-info pull-right r-activity">{{$customer->balance}}</span>
-                </li>
-            </ul>
-
-        </section>
-        </div>
-    </div>
+    @include('common.customer_info')
 
     <h3>Poliçeler</h3>
     <hr>
