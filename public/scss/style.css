@@ -1230,7 +1230,7 @@ header .form-inline {
     border: none;
     border-radius: 0;
     box-shadow: none;
-    top: 49px !important; }
+    /*top: 49px !important;*/ }
     .header-left .dropdown .dropdown-menu p {
       font-size: 15px;
       margin: 0;

@@ -15,7 +15,7 @@
                             </tr>
                             <tr>
                                 <td>Poliçe Tipi</td>
-                                <td>: <strong>{{$policy->policy_type->name}}</strong></td>
+                                <td>: <strong>{{$policy->policyType->name}}</strong></td>
                             </tr>
                         </table>
                     </div>
@@ -36,7 +36,7 @@
                                           class="form-control"></textarea>
                             </div>
                         </div>
-                        @foreach($policy->policy_type->features as $feature => $feature_type)
+                        @foreach($policy->policyType->features as $feature => $feature_type)
                             <div class="row form-group">
                                 <div class="col col-md-3"><label
                                             class=" form-control-label">{{$feature}}</label></div>
@@ -66,7 +66,7 @@
                     <th>ID</th>
                     <th>Fiyat</th>
                     <th>Açıklama</th>
-                    @foreach($policy->policy_type->features as $feature => $feature_type)
+                    @foreach($policy->policyType->features as $feature => $feature_type)
                         <th>{{$feature}}</th>
                     @endforeach
                     <th></th>
@@ -85,7 +85,7 @@
                 {"data": "id"},
                 {"data": "price"},
                 {"data": "description"},
-                @foreach($policy->policy_type->features as $feature => $feature_type)
+                @foreach($policy->policyType->features as $feature => $feature_type)
                 {"data": "features.{{$feature}}", "defaultContent":"-"},
                 @endforeach
 

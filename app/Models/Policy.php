@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Policy
  * @property mixed id
- * @property PolicyType policy_type
  * @property Customer customer
+ * @property PolicyType policyType
  * @package App\Models
  */
 class Policy extends Model

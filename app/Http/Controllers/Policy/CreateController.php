@@ -45,7 +45,8 @@ class CreateController extends Controller
             ]);
 
             \DB::commit();
-            return redirect('policy/' . $policy->id . '/items');
+            return redirect('policy/' . $policy->id . '/items')
+                ->with('message', 'Poliçe oluşturuldu');
         } catch (\Exception $e) {
             \DB::rollBack();
             throw $e;
@@ -73,7 +74,7 @@ class CreateController extends Controller
             $item->description = $createItemRequest->get('description');
             $item->price = $createItemRequest->get('price');
             $features = [];
-            foreach ($policy->policy_type->features as $feature => $feature_type) {
+            foreach ($policy->policyType->features as $feature => $feature_type) {
                 $features[$feature] = $createItemRequest->get($feature);
             }
             if (!empty($features)) {
@@ -88,7 +89,8 @@ class CreateController extends Controller
             \DB::rollBack();
             throw $e;
         }
-        return redirect('policy/' . $policy->id . '/items');
+        return redirect('policy/' . $policy->id . '/items')
+            ->with('message', 'Öğe poliçeye eklendi');
 
     }
 
