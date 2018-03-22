@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
-            <form action="{{url('policy/'.$policy->id.'/items')}}" method="post" class="form-horizontal">
+            <form action="{{url('policy/'.$policy->id.'/details')}}" method="post" class="form-horizontal">
                 <input type="hidden" value="{{csrf_token()}}" name="_token">
                 <div class="card">
                     <div class="card-header">
@@ -58,67 +58,7 @@
             </form>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <table id="items" class="table" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Fiyat</th>
-                    <th>Açıklama</th>
-                    @foreach($policy->policyType->features as $feature => $feature_type)
-                        <th>{{$feature}}</th>
-                    @endforeach
-                    <th></th>
-
-                </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-    <script>
-
-        typesTable = $('#items').DataTable({
-            dom: 'Bfrtip',
-            "data": {!! $policy->items !!},
-            "columns": [
-                {"data": "id"},
-                {"data": "price"},
-                {"data": "description"},
-                @foreach($policy->policyType->features as $feature => $feature_type)
-                {"data": "features.{{$feature}}", "defaultContent":"-"},
-                @endforeach
-
-                {
-                    data: null,
-                    "orderable": false,
-                    render: function (data, type, row) {
-                        return '<button class="btn btn-sm btn-danger" onclick="deleteType(' + data.id + ')">Sil</button>';
-                    }
-                }
-            ],
-            "buttons": [
-                'copy', 'excel', 'pdf'
-            ]
-        });
 
 
-        function deleteType(id) {
-            swal("Are you sure to delete", {buttons: ["Cancel", true]}).then((answer) => {
-                if (answer) {
-                    axios.post(url('policy/types/' + id + '/delete'), {})
-                        .then(function (response) {
-                            swal("Deleted!", response.data.message, "success");
-                            typesTable.ajax.reload();
-                        })
-                        .catch(function (error) {
-                            console.log(error.response);
-                            swal("Error", error.message + '\n' + error.response.data.message, "error");
-                        });
-                }
-            });
-
-        }
-    </script>
 
 @stop

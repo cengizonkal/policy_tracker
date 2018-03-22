@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed id
  * @property Customer customer
  * @property PolicyType policyType
+ * @property array features
+ * @property mixed price
  * @package App\Models
  */
 class Policy extends Model
@@ -18,12 +20,9 @@ class Policy extends Model
     protected $fillable = ['policy_type_id'];
     protected $appends = ['total_price'];
     protected $dates = ['valid_until'];
+    protected $casts = ['features' => 'array'];
 
 
-    public function items()
-    {
-        return $this->hasMany('\App\Models\Item');
-    }
 
     public function policyType()
     {
@@ -37,7 +36,7 @@ class Policy extends Model
 
     public function getTotalPriceAttribute()
     {
-        return $this->items()->sum('price');
+        return $this->price;
     }
     protected function serializeDate(\DateTimeInterface $date)
     {

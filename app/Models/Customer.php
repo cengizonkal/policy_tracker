@@ -21,11 +21,6 @@ class Customer extends Model
         return $this->hasMany('\App\Models\Policy');
     }
 
-    public function items()
-    {
-        return $this->hasManyThrough('\App\Models\Items', '\App\Models\Policy');
-    }
-
     public function getBalanceAttribute()
     {
         return $this->accountingRecords->sum('credit') - $this->accountingRecords->sum('debt');

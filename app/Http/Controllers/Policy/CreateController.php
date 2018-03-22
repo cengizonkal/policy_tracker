@@ -57,30 +57,24 @@ class CreateController extends Controller
 
     public function items(Policy $policy)
     {
-        return view('policy.items')
+        return view('policy.features')
             ->with('policy', $policy);
     }
 
 
-    public function saveItems(Policy $policy, CreateItemRequest $createItemRequest)
+    public function saveDetails(Policy $policy, CreateItemRequest $createItemRequest)
     {
-
-
         try {
             \DB::beginTransaction();
-            $item = new Item();
 
-            $item->policy_id = $policy->id;
-            $item->description = $createItemRequest->get('description');
-            $item->price = $createItemRequest->get('price');
             $features = [];
             foreach ($policy->policyType->features as $feature => $feature_type) {
                 $features[$feature] = $createItemRequest->get($feature);
             }
             if (!empty($features)) {
-                $item->features = $features;
+                $policy->features = $features;
             }
-            $item->save();
+            $policy->save();
             $policy->customer->accountingRecords()->create([
                 'debt' => $createItemRequest->get('price')
             ]);
@@ -89,8 +83,8 @@ class CreateController extends Controller
             \DB::rollBack();
             throw $e;
         }
-        return redirect('policy/' . $policy->id . '/items')
-            ->with('message', 'Öğe poliçeye eklendi');
+        return redirect('policy/list')
+            ->with('message', 'Poliçe Güncellendi');
 
     }
 

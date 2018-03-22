@@ -5,8 +5,6 @@
 @include('layouts.left_panel')
 <div id="right-panel" class="right-panel">
     @include('layouts.header')
-
-
     <div class="content">
         @if (session('message'))
             <div class="row">

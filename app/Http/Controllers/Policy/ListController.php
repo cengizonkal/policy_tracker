@@ -11,6 +11,9 @@ class ListController extends Controller
     public function index()
     {
         $policies = Policy::with(['customer', 'policyType'])->get();
-        return view('policy.list')->with('policies', $policies);
+        //dd($policies);
+
+        return view('policy.list')
+            ->with('policies', $policies);
     }
 }

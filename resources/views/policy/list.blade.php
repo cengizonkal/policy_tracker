@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    ---
 <div class="row">
     <div class="col-lg-12">
         <table id="policies" class="table" cellspacing="0" width="100%">
