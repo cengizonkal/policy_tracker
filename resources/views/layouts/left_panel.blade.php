@@ -6,8 +6,8 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('images/logo.png')}}" alt="Logo"></a>
-            <a class="navbar-brand hidden" href="{{url('/')}}"><img src="{{asset('images/logo2.png')}}" alt="Logo"></a>
+            <a class="navbar-brand" href="{{url('/')}}">Hunter Insurance</a>
+            <a class="navbar-brand hidden" href="{{url('/')}}">H</a>
         </div>
 
         @include('layouts.menu')
