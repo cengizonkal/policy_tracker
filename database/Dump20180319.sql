@@ -35,7 +35,7 @@ CREATE TABLE `accounting_records` (
   PRIMARY KEY (`id`),
   KEY `fk_accounting_records_customers1_idx` (`customer_id`),
   CONSTRAINT `fk_accounting_records_customers1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,8 +44,33 @@ CREATE TABLE `accounting_records` (
 
 LOCK TABLES `accounting_records` WRITE;
 /*!40000 ALTER TABLE `accounting_records` DISABLE KEYS */;
-INSERT INTO `accounting_records` VALUES (1,1000.00,0.00,'2018-03-18 14:44:02','2018-03-18 14:44:08',6,NULL),(2,5.00,0.00,'2018-03-18 14:44:15','2018-03-18 14:44:19',6,NULL),(3,0.00,5.00,'2018-03-18 16:13:21',NULL,6,NULL),(4,6.00,5.00,'2018-03-18 14:19:25','2018-03-18 14:19:25',6,NULL),(5,1.00,1.00,'2018-03-18 14:28:33','2018-03-18 14:28:33',6,'2');
+INSERT INTO `accounting_records` VALUES (1,1000.00,0.00,'2018-03-18 14:44:02','2018-03-18 14:44:08',6,NULL),(2,5.00,0.00,'2018-03-18 14:44:15','2018-03-18 14:44:19',6,NULL),(3,0.00,5.00,'2018-03-18 16:13:21',NULL,6,NULL),(4,6.00,5.00,'2018-03-18 14:19:25','2018-03-18 14:19:25',6,NULL),(5,1.00,1.00,'2018-03-18 14:28:33','2018-03-18 14:28:33',6,'2'),(6,500.00,0.00,'2018-03-20 19:11:06','2018-03-20 19:11:06',7,NULL),(7,222.00,0.00,'2018-03-20 19:23:07','2018-03-20 19:23:07',7,NULL);
 /*!40000 ALTER TABLE `accounting_records` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customer_types`
+--
+
+DROP TABLE IF EXISTS `customer_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customer_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(45) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_types`
+--
+
+LOCK TABLES `customer_types` WRITE;
+/*!40000 ALTER TABLE `customer_types` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -64,8 +89,11 @@ CREATE TABLE `customers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+  `customer_type_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_customers_customer_type_id_idx` (`customer_type_id`),
+  CONSTRAINT `fk_customers_customer_type_id` FOREIGN KEY (`customer_type_id`) REFERENCES `customer_types` (`id`) ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,39 +102,37 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (4,'test','test',NULL,NULL,'2018-03-10 21:08:16','2018-03-10 21:08:16',NULL),(5,'test2','test2',NULL,NULL,'2018-03-12 18:57:10','2018-03-12 18:57:10',NULL),(6,'cengiz','önkal',NULL,NULL,'2018-03-17 11:54:48','2018-03-17 11:54:48',NULL);
+INSERT INTO `customers` VALUES (4,'test','test',NULL,NULL,'2018-03-10 21:08:16','2018-03-10 21:08:16',NULL,NULL),(5,'test2','test2',NULL,NULL,'2018-03-12 18:57:10','2018-03-12 18:57:10',NULL,NULL),(6,'cengiz','önkal',NULL,NULL,'2018-03-17 11:54:48','2018-03-17 11:54:48',NULL,NULL),(7,'Ayşe','Önkal','5555','ayse@ciu.edu.tr','2018-03-20 19:07:48','2018-03-20 19:07:48',NULL,NULL);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `items`
+-- Table structure for table `followups`
 --
 
-DROP TABLE IF EXISTS `items`;
+DROP TABLE IF EXISTS `followups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `items` (
+CREATE TABLE `followups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `price` decimal(10,2) DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8_turkish_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `policy_id` int(11) NOT NULL,
-  `features` json DEFAULT NULL,
+  `processed_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_items_policies1_idx` (`policy_id`),
-  CONSTRAINT `fk_items_policies1` FOREIGN KEY (`policy_id`) REFERENCES `policies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+  KEY `fk_followups_customer_id_idx` (`customer_id`),
+  CONSTRAINT `fk_followups_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `items`
+-- Dumping data for table `followups`
 --
 
-LOCK TABLES `items` WRITE;
-/*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES (1,1000.00,'Açıklama','2018-03-17 11:56:56','2018-03-17 11:56:56',3,'{\"Model\": \"2016\", \"Plaka\": \"GR 256\"}');
-/*!40000 ALTER TABLE `items` ENABLE KEYS */;
+LOCK TABLES `followups` WRITE;
+/*!40000 ALTER TABLE `followups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `followups` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -173,12 +199,14 @@ CREATE TABLE `policies` (
   `customer_id` int(11) NOT NULL,
   `policy_type_id` int(11) DEFAULT NULL,
   `valid_until` timestamp NULL DEFAULT NULL,
+  `features` json DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `fk_policies_customers_idx` (`customer_id`),
   KEY `fk_policies_policy_type_id_idx` (`policy_type_id`),
   CONSTRAINT `fk_policies_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_policies_policy_type_id` FOREIGN KEY (`policy_type_id`) REFERENCES `policy_types` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +215,7 @@ CREATE TABLE `policies` (
 
 LOCK TABLES `policies` WRITE;
 /*!40000 ALTER TABLE `policies` DISABLE KEYS */;
-INSERT INTO `policies` VALUES (1,NULL,'2018-03-10 21:08:16','2018-03-10 23:08:16',4,1,'2018-03-18 13:22:18'),(2,NULL,'2018-03-12 18:57:10','2018-03-12 20:57:10',5,1,'2018-03-18 13:22:21'),(3,NULL,'2018-03-17 11:54:48','2018-03-17 13:54:48',6,1,'2018-03-18 13:22:23');
+INSERT INTO `policies` VALUES (1,NULL,'2018-03-10 21:08:16','2018-03-10 23:08:16',4,1,'2018-03-18 13:22:18',NULL,NULL),(2,NULL,'2018-03-12 18:57:10','2018-03-12 20:57:10',5,1,'2018-03-18 13:22:21',NULL,NULL),(3,NULL,'2018-03-17 11:54:48','2018-03-17 13:54:48',6,1,'2018-03-18 13:22:23',NULL,NULL),(4,NULL,'2018-03-20 19:07:48','2018-03-20 21:07:48',7,1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `policies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +270,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('FJ6mr3Hxc8RUWScQRk72cl8npQfDcv6r6DCJR6U7',1,'::1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTTdCZWlMZ2Y0eUYzRnRacE9qY2lMTWluNG02MkVnaW0za1NYdW1SRCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo2MDoiaHR0cDovL2xvY2FsaG9zdC9wb2xpY3lfdHJhY2tlci9wdWJsaWMvY3VzdG9tZXIvNi9hY2NvdW50aW5nIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1521407446),('ZH1W4PvlVXXBWxbpsY4Wr9emgMK0g76H7tPI7xE1',1,'::1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoibHY5SFpINnpoOVl0OWE2ZGdiMERaSTk4eTlQOWVHUDBoQmg1YVF6dyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjA6Imh0dHA6Ly9sb2NhbGhvc3QvcG9saWN5X3RyYWNrZXIvcHVibGljL2N1c3RvbWVyLzYvYWNjb3VudGluZyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==',1521391683);
+INSERT INTO `sessions` VALUES ('9d4RHeEctwyp087GzPMgOZ94xdFQtUe7TGNH3Y8j',1,'::1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUGpKc0w4aXVNTnZHZnBVZUhjS1FqdENFeFQwY2V3OVBNUEdudEFnVCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo1ODoiaHR0cDovL2xvY2FsaG9zdC9wb2xpY3lfdHJhY2tlci9wdWJsaWMvY3VzdG9tZXIvNy9wb2xpY2llcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1521756059);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,4 +313,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-19 23:02:29
+-- Dump completed on 2018-03-23  0:01:58
