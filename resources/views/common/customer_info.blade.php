@@ -6,6 +6,8 @@
                     <div class="media-body">
                         <div class="col-lg-11">
                             <h2 class="text-light">{{$customer->full_name}} </h2>
+                            <small class="text-white">Telefon: {{$customer->phone}}</small>
+                            <small class="text-white">Email: {{$customer->email}}</small>
                         </div>
                         <div class="col-lg-1 pull-right">
                             <div class="dropdown">
@@ -22,8 +24,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p>{{$customer->phone}}</p>
-                        <p> {{$customer->email}}</p>
+                        <div class="clearfix"></div>
+
                     </div>
                 </div>
 
