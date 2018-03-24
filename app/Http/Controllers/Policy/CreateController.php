@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateItemRequest;
 use App\Http\Requests\CreatePolicyRequest;
 use App\Models\Customer;
+use App\Models\CustomerType;
 use App\Models\Item;
 use App\Models\Policy;
 use App\Models\PolicyType;
@@ -21,7 +22,9 @@ class CreateController extends Controller
     public function showForm()
     {
         $policyTypes = PolicyType::all();
+        $customerTypes = CustomerType::all();
         return view('policy.create')
+            ->with('customerTypes', $customerTypes)
             ->with('policyTypes', $policyTypes);
     }
 
@@ -36,6 +39,8 @@ class CreateController extends Controller
             $customer->last_name = $policyRequest->get('last_name');
             $customer->email = $policyRequest->get('email');
             $customer->phone = $policyRequest->get('phone');
+            $customer->address = $policyRequest->get('address');
+            $customer->customer_type_id = $policyRequest->get('customer_type_id');
 
             $customer->save();
 
@@ -45,7 +50,7 @@ class CreateController extends Controller
             ]);
 
             \DB::commit();
-            return redirect('policy/' . $policy->id . '/items')
+            return redirect('policy/' . $policy->id . '/details')
                 ->with('message', 'Poliçe oluşturuldu');
         } catch (\Exception $e) {
             \DB::rollBack();
@@ -55,9 +60,9 @@ class CreateController extends Controller
 
     }
 
-    public function items(Policy $policy)
+    public function details(Policy $policy)
     {
-        return view('policy.features')
+        return view('policy.details')
             ->with('policy', $policy);
     }
 

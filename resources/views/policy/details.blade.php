@@ -23,11 +23,23 @@
 
                         <div class="row form-group">
                             <div class="col col-md-3"><label
-                                        class=" form-control-label">Fiyat</label></div>
+                                        class=" form-control-label">Poliçe Tutarı</label></div>
                             <div class="col-12 col-md-9"><input name="price" type="number" id="text-input"
                                                                 class="form-control">
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label
+                                        class=" form-control-label">Poliçe Tarihi (Başlangıç/Bitiş)</label></div>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" value="{{\Carbon\Carbon::today()->toDateString()}}">
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" value="{{\Carbon\Carbon::today()->addYear()->toDateString()}}" required>
+                            </div>
+                        </div>
+
                         <div class="row form-group">
                             <div class="col col-md-3"><label
                                         class=" form-control-label">Açıklama</label></div>

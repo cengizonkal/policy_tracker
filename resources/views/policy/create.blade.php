@@ -15,6 +15,17 @@
                             <div class="card-body">
 
                                 <fieldset>
+                                    <legend>Müşteri Tipi</legend><hr>
+                                    <div class="form-group">
+
+                                        <select name="customer_type_id" class="form-control">
+                                            @foreach($customerTypes as $customerType)
+                                                <option value="{{$customerType->id}}">{{$customerType->description}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
                                     <legend>Müşteri</legend>
                                     <hr>
                                     <div class="form-group">
@@ -26,6 +37,10 @@
                                         <label class="control-label mb-1">Soyadı</label>
                                         <input name="last_name" type="text" class="form-control" required
                                                placeholder="Müşteri Soyadı"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label mb-1">Adres</label>
+                                        <textarea name="address" id="" cols="30" rows="5" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label mb-1">Email</label>

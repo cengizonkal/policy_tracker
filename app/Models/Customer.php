@@ -12,10 +12,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property AccountingRecord[] accountingRecords
  * @property Policy[] policies
  * @property int id
+ * @property string address
+ * @property int customer_type_id
  */
 class Customer extends Model
 {
-    protected $appends=['balance', 'policy_count','full_name','total_debt','total_credit'];
+    protected $appends = ['balance', 'policy_count', 'full_name', 'total_debt', 'total_credit'];
+
     public function policies()
     {
         return $this->hasMany('\App\Models\Policy');
@@ -30,6 +33,7 @@ class Customer extends Model
     {
         return $this->accountingRecords->sum('credit');
     }
+
     public function getTotalDebtAttribute()
     {
         return $this->accountingRecords->sum('debt');
@@ -40,13 +44,19 @@ class Customer extends Model
     {
         return $this->policies->count();
     }
+
     public function getFullNameAttribute()
     {
-        return title_case($this->first_name.' '.$this->last_name);
+        return title_case($this->first_name . ' ' . $this->last_name);
     }
 
     public function accountingRecords()
     {
         return $this->hasMany('\App\Models\AccountingRecord');
+    }
+
+    public function customerType()
+    {
+        return $this->belongsTo('\App\Models\CustomerType');
     }
 }
