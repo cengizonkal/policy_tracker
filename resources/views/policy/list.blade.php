@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    ---
 <div class="row">
     <div class="col-lg-12">
         <table id="policies" class="table" cellspacing="0" width="100%">
@@ -11,6 +10,7 @@
                 <th>Soyadı</th>
                 <th>Poliçe Türü</th>
                 <th>Poliçe Tutarı</th>
+                <th>Başlangıç Tarihi</th>
                 <th>Bitiş Tarihi</th>
                 <th></th>
             </tr>
@@ -31,6 +31,7 @@
                 {"data": "policy_type.name"},
 
                 {"data": "total_price"},
+                {"data": "start_at"},
                 {"data": "valid_until"},
                 {
                     data: null,

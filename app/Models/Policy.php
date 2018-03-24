@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property PolicyType policyType
  * @property array features
  * @property mixed price
+ * @property mixed start_at
+ * @property mixed valid_until
  * @package App\Models
  */
 class Policy extends Model

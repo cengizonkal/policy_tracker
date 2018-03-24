@@ -32,11 +32,11 @@
                             <div class="col col-md-3"><label
                                         class=" form-control-label">Poliçe Tarihi (Başlangıç/Bitiş)</label></div>
                             <div class="col-md-4">
-                                <input type="date" class="form-control" value="{{\Carbon\Carbon::today()->toDateString()}}">
+                                <input type="date" name="start_at" class="form-control" value="{{\Carbon\Carbon::today()->toDateString()}}">
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <input type="date" class="form-control" value="{{\Carbon\Carbon::today()->addYear()->toDateString()}}" required>
+                                <input type="date" name="valid_until" class="form-control" value="{{\Carbon\Carbon::today()->addYear()->toDateString()}}" required>
                             </div>
                         </div>
 
@@ -48,12 +48,12 @@
                                           class="form-control"></textarea>
                             </div>
                         </div>
-                        @foreach($policy->policyType->features as $feature => $feature_type)
+                        @foreach($policy->policyType->features as $feature)
                             <div class="row form-group">
                                 <div class="col col-md-3"><label
-                                            class=" form-control-label">{{$feature}}</label></div>
-                                <div class="col-12 col-md-9"><input type="{{$feature_type}}" id="text-input"
-                                                                    name="{{$feature}}" placeholder="{{$feature}}"
+                                            class=" form-control-label">{{$feature['title']}}</label></div>
+                                <div class="col-12 col-md-9"><input type="{{$feature['type']}}" id="text-input"
+                                                                    name="{{$feature['name']}}" placeholder="{{$feature['title']}}"
                                                                     class="form-control"></div>
                             </div>
                         @endforeach

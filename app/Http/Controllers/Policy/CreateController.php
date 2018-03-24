@@ -73,12 +73,16 @@ class CreateController extends Controller
             \DB::beginTransaction();
 
             $features = [];
-            foreach ($policy->policyType->features as $feature => $feature_type) {
-                $features[$feature] = $createItemRequest->get($feature);
+            foreach ($policy->policyType->features as $feature) {
+                $features[$feature['name']] = $createItemRequest->get($feature['name']);
             }
+
             if (!empty($features)) {
                 $policy->features = $features;
             }
+            $policy->price = $createItemRequest->get('price');
+            $policy->start_at = $createItemRequest->get('valid_until');
+            $policy->valid_until = $createItemRequest->get('valid_until');
             $policy->save();
             $policy->customer->accountingRecords()->create([
                 'debt' => $createItemRequest->get('price')
