@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int id
  * @property string address
  * @property int customer_type_id
+ * @property mixed policy_type_id
+ * @property CustomerType customerType
  */
 class Customer extends Model
 {

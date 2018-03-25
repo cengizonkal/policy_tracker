@@ -27,10 +27,15 @@ Route::get('/customer/list', 'Customer\CustomerController@index');
 Route::get('/customer/{customer}/policies', 'Customer\CustomerController@policies');
 Route::get('/customer/{customer}/accounting', 'Customer\AccountingController@index');
 Route::get('/customer/{customer}/accounting/add', 'Customer\AccountingController@add');
+Route::get('/customer/{customer}/update', 'Customer\CustomerController@updateForm');
+Route::post('/customer/{customer}/update', 'Customer\CustomerController@update');
+
+Route::get('/followup/list', 'FollowupController@index');
 
 Route::get('/policy/types', 'Policy\TypeController@index');
 Route::post('/policy/types', 'Policy\TypeController@types');
 Route::post('/policy/types/{policy_type}/delete', 'Policy\TypeController@delete');
+
 
 
 

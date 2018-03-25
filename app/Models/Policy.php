@@ -21,7 +21,7 @@ class Policy extends Model
 
     protected $fillable = ['policy_type_id'];
     protected $appends = ['total_price'];
-    protected $dates = ['valid_until'];
+    //protected $dates = ['valid_until'];
     protected $casts = ['features' => 'array'];
 
 

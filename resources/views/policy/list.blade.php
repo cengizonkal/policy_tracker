@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
-        <table id="policies" class="table" cellspacing="0" width="100%">
+    <div class="col-lg-11">
+        <table id="policies" class="table table-sm table-hover" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th>ID</th>
@@ -37,7 +37,18 @@
                     data: null,
                     "orderable": false,
                     render: function (data, type, row) {
-                        return '<button class="btn btn-sm btn-danger" onclick="deleteType(' + data.id + ')">Sil</button>';
+                        return `<div class="dropdown">
+                            <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button"  data-toggle="dropdown"  >
+                            <span class="ti-menu"></span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/policies')+`">Cari</a>
+                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/accounting')+`">Muhasebe</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Güncelle</a>
+                            <a class="dropdown-item" href="#">Sil</a>
+                        </div>
+                        </div>`;
                     }
                 }
             ],

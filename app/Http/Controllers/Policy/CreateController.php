@@ -84,9 +84,12 @@ class CreateController extends Controller
             $policy->start_at = $createItemRequest->get('valid_until');
             $policy->valid_until = $createItemRequest->get('valid_until');
             $policy->save();
-            $policy->customer->accountingRecords()->create([
-                'debt' => $createItemRequest->get('price')
-            ]);
+            if ($policy->customer->customerType->is_accountable) {
+                $policy->customer->accountingRecords()->create([
+                    'debt' => $createItemRequest->get('price')
+                ]);
+            }
+
             \DB::commit();
         } catch (\Exception $e) {
             \DB::rollBack();
