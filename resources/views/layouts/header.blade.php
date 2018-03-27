@@ -16,22 +16,17 @@
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        <span class="count bg-danger">0</span>
+                        @if($followups->count()>0)
+                            <span class="count bg-danger">{{$followups->count()}}</span>
+                        @endif
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <p class="red">You have 3 Notification</p>
-                        <a class="dropdown-item media bg-flat-color-1" href="#">
-                            <i class="fa fa-check"></i>
-                            <p>Server #1 overloaded.</p>
-                        </a>
-                        <a class="dropdown-item media bg-flat-color-4" href="#">
-                            <i class="fa fa-info"></i>
-                            <p>Server #2 overloaded.</p>
-                        </a>
-                        <a class="dropdown-item media bg-flat-color-5" href="#">
-                            <i class="fa fa-warning"></i>
-                            <p>Server #3 overloaded.</p>
-                        </a>
+                        @if($followups->count()<=0)<p>Bildiriminiz yok.</p>@endif
+                        @foreach($followups->orderBy('id','desc')->take(3)->get() as $followup)
+                            <a class="dropdown-item media " href="{{url('followup/list')}}">
+                                <p>({{$followup->policy->policyType->name}}){{$followup->policy->customer->full_name}}</p>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -41,7 +36,7 @@
             <div class="user-area dropdown float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">
-                    <h5 class="user-avatar rounded-circle" >{{\Auth::user()->getInitials()}}</h5>
+                    <h5 class="user-avatar rounded-circle">{{\Auth::user()->getInitials()}}</h5>
                 </a>
 
                 <div class="user-menu dropdown-menu">
