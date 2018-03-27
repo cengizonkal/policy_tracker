@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property mixed resolved_at
  * @property mixed result
+ * @property mixed policy_id
+ * @property string description
+ * @property mixed customer_id
  */
 class Followup extends Model
 {

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed price
  * @property mixed start_at
  * @property mixed valid_until
+ * @property mixed customer_id
  * @package App\Models
  */
 class Policy extends Model
@@ -23,7 +24,6 @@ class Policy extends Model
     protected $appends = ['total_price'];
     //protected $dates = ['valid_until'];
     protected $casts = ['features' => 'array'];
-
 
 
     public function policyType()
@@ -40,9 +40,15 @@ class Policy extends Model
     {
         return $this->price;
     }
+
     protected function serializeDate(\DateTimeInterface $date)
     {
-        return $date->format( 'd-m-Y H:i:s'); // Use your own format here
+        return $date->format('d-m-Y H:i:s'); // Use your own format here
+    }
+
+    public function followups()
+    {
+        return $this->hasMany('\App\Models\Followup');
     }
 
 }

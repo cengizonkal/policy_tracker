@@ -24,6 +24,9 @@
         typesTable = $('#policies').DataTable({
             dom: 'Bfrtip',
             "data": {!! $policies !!},
+            "language": {
+                "url": url("datatables.turkish.lang")
+            },
             "columns": [
                 {"data": "id"},
                 {"data": "customer.first_name"},

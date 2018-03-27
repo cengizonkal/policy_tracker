@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Followup;
 use App\Models\Policy;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -16,10 +17,20 @@ class CreateFollowup extends Command
 
     public function handle()
     {
-        $policies = Policy::where('valid_until', '>=', Carbon::today()->addDays(3))->get();
+
+        /** @var Policy[] $policies */
+        $policies = Policy::where('valid_until', '<=', Carbon::today()->addDays(3))
+            ->where('valid_until', '>', Carbon::today()->startOfDay())
+            ->whereDoesntHave('followups', function ($query) {
+                $query->whereNull('resolved_at');
+            })->get();
 
         foreach ($policies as $policy) {
-//            $policy->
+            $followup = new Followup();
+            $followup->policy_id = $policy->id;
+            $followup->description = 'Poliçe süresi bitmek üzere';
+            $followup->customer_id = $policy->customer_id;
+            $followup->save();
         }
     }
 }

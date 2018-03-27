@@ -13,28 +13,30 @@
 
 
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout');
 
-Route::get('/', 'Dashboard@index');
-Route::get('/home', 'Dashboard@index')->name('home');
-Route::get('/policy/create', 'Policy\CreateController@showForm');
-Route::post('/policy/create', 'Policy\CreateController@create');
-Route::get('/policy/{policy}/details', 'Policy\CreateController@details');
-Route::post('/policy/{policy}/details', 'Policy\CreateController@saveDetails');
 
-Route::get('/policy/list', 'Policy\ListController@index');
+Route::get('/', 'Dashboard@index')->middleware('auth');
+Route::get('/home', 'Dashboard@index')->name('home')->middleware('auth');
+Route::get('/policy/create', 'Policy\CreateController@showForm')->middleware('auth');
+Route::post('/policy/create', 'Policy\CreateController@create')->middleware('auth');
+Route::get('/policy/{policy}/details', 'Policy\CreateController@details')->middleware('auth');
+Route::post('/policy/{policy}/details', 'Policy\CreateController@saveDetails')->middleware('auth');
 
-Route::get('/customer/list', 'Customer\CustomerController@index');
-Route::get('/customer/{customer}/policies', 'Customer\CustomerController@policies');
-Route::get('/customer/{customer}/accounting', 'Customer\AccountingController@index');
-Route::get('/customer/{customer}/accounting/add', 'Customer\AccountingController@add');
-Route::get('/customer/{customer}/update', 'Customer\CustomerController@updateForm');
-Route::post('/customer/{customer}/update', 'Customer\CustomerController@update');
+Route::get('/policy/list', 'Policy\ListController@index')->middleware('auth');
 
-Route::get('/followup/list', 'FollowupController@index');
+Route::get('/customer/list', 'Customer\CustomerController@index')->middleware('auth');
+Route::get('/customer/{customer}/policies', 'Customer\CustomerController@policies')->middleware('auth');
+Route::get('/customer/{customer}/accounting', 'Customer\AccountingController@index')->middleware('auth');
+Route::get('/customer/{customer}/accounting/add', 'Customer\AccountingController@add')->middleware('auth');
+Route::get('/customer/{customer}/update', 'Customer\CustomerController@updateForm')->middleware('auth');
+Route::post('/customer/{customer}/update', 'Customer\CustomerController@update')->middleware('auth');
 
-Route::get('/policy/types', 'Policy\TypeController@index');
-Route::post('/policy/types', 'Policy\TypeController@types');
-Route::post('/policy/types/{policy_type}/delete', 'Policy\TypeController@delete');
+Route::get('/followup/list', 'FollowupController@index')->middleware('auth');
+
+Route::get('/policy/types', 'Policy\TypeController@index')->middleware('auth');
+Route::post('/policy/types', 'Policy\TypeController@types')->middleware('auth');
+Route::post('/policy/types/{policy_type}/delete', 'Policy\TypeController@delete')->middleware('auth');
 
 
 
