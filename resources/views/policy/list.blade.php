@@ -9,6 +9,7 @@
                 <th>Adı</th>
                 <th>Soyadı</th>
                 <th>Poliçe Türü</th>
+                <th>Poliçe Şirketi</th>
                 <th>Poliçe Tutarı</th>
                 <th>Başlangıç Tarihi</th>
                 <th>Bitiş Tarihi</th>
@@ -32,7 +33,7 @@
                 {"data": "customer.first_name"},
                 {"data": "customer.last_name"},
                 {"data": "policy_type.name"},
-
+                {"data": "policy_company.title","defaultContent":"Belirtilmedi"},
                 {"data": "total_price"},
                 {"data": "start_at"},
                 {"data": "valid_until"},

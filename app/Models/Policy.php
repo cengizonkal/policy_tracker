@@ -25,6 +25,10 @@ class Policy extends Model
     //protected $dates = ['valid_until'];
     protected $casts = ['features' => 'array'];
 
+    public function policyCompany()
+    {
+        return $this->belongsTo('\App\Models\PolicyCompany');
+    }
 
     public function policyType()
     {

@@ -22,21 +22,35 @@
                     <div class="card-body">
 
                         <div class="row form-group">
-                            <div class="col col-md-3"><label
+                            <div class=" col-md-3"><label
                                         class=" form-control-label">Poliçe Tutarı</label></div>
-                            <div class="col-12 col-md-9"><input name="price" type="number" id="text-input"
-                                                                class="form-control">
+                            <div class="col-md-4">
+                                <input name="price" type="number" id="text-input" class="form-control form-control-sm">
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-3"><label
+                                        class=" form-control-label">Poliçe Şirketi</label></div>
+                            <div class="col-md-4">
+                                <select name="policy_company_id" class="form-control form-control-sm">
+                                    @foreach($policyCompanies as $policyCompany)
+                                        <option value="{{$policyCompany->id}}">{{$policyCompany->title}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3"><label
                                         class=" form-control-label">Poliçe Tarihi (Başlangıç/Bitiş)</label></div>
                             <div class="col-md-4">
-                                <input type="date" name="start_at" class="form-control" value="{{\Carbon\Carbon::today()->toDateString()}}">
+                                <input type="date" name="start_at" class="form-control form-control-sm"
+                                       value="{{\Carbon\Carbon::today()->toDateString()}}">
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <input type="date" name="valid_until" class="form-control" value="{{\Carbon\Carbon::today()->addYear()->toDateString()}}" required>
+                                <input type="date" name="valid_until" class="form-control form-control-sm"
+                                       value="{{\Carbon\Carbon::today()->addYear()->toDateString()}}" required>
                             </div>
                         </div>
 
@@ -45,7 +59,7 @@
                                         class=" form-control-label">Açıklama</label></div>
                             <div class="col-12 col-md-9">
                                 <textarea name="description" id="description" cols="30" rows="10"
-                                          class="form-control"></textarea>
+                                          class="form-control form-control-sm"></textarea>
                             </div>
                         </div>
                         @foreach($policy->policyType->features as $feature)
@@ -53,8 +67,9 @@
                                 <div class="col col-md-3"><label
                                             class=" form-control-label">{{$feature['title']}}</label></div>
                                 <div class="col-12 col-md-9"><input type="{{$feature['type']}}" id="text-input"
-                                                                    name="{{$feature['name']}}" placeholder="{{$feature['title']}}"
-                                                                    class="form-control"></div>
+                                                                    name="{{$feature['name']}}"
+                                                                    placeholder="{{$feature['title']}}"
+                                                                    class="form-control form-control-sm"></div>
                             </div>
                         @endforeach
 

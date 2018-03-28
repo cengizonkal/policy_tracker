@@ -10,9 +10,7 @@ class ListController extends Controller
 {
     public function index()
     {
-        $policies = Policy::with(['customer', 'policyType'])->get();
-        //dd($policies);
-
+        $policies = Policy::with(['customer', 'policyType', 'policyCompany'])->get();
         return view('policy.list')
             ->with('policies', $policies);
     }

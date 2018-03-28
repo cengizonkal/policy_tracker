@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\CustomerType;
 use App\Models\Item;
 use App\Models\Policy;
+use App\Models\PolicyCompany;
 use App\Models\PolicyType;
 use Illuminate\Http\Request;
 
@@ -62,8 +63,10 @@ class CreateController extends Controller
 
     public function details(Policy $policy)
     {
+        $policyCompanies = PolicyCompany::all();
         return view('policy.details')
-            ->with('policy', $policy);
+            ->with('policy', $policy)
+            ->with('policyCompanies', $policyCompanies);
     }
 
 
