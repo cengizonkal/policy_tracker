@@ -21,6 +21,7 @@
         </div>
     </div>
 
+
     <script>
 
         typesTable = $('#customers').DataTable({
@@ -38,13 +39,18 @@
                 {"data": "policy.customer.customer_type.description"},
                 {"data": "description"},
                 {
-                    "data": "description", orderable: false, render: function (data, type, row) {
-                    return `<from action="post" url="`+url('followup/'+data.id+'/close')+`">
-<div class="col-lg-12">
-<div class="input-group">
-<input type="text" class="form-control form-control-sm" placeholder="Sonuç">
-<span class="input-group-btn">
-<button class="btn btn-secondary btn-sm" type="button">Gizle</button></span></div></div></form>`;
+                    "data": null, "orderable": false, render: function (data, type, row) {
+                    return `<form action="` + url('followup/' + data.id + '/close') + `" method="post">
+	<div class="col-lg-12">
+		<div class="input-group">
+		<input type="text" class="form-control form-control-sm" placeholder="Sonuç" name="result">
+		<input type="hidden" name="_token" value="{{csrf_token()}}">
+			<span class="input-group-btn">
+			<button class="btn btn-secondary btn-sm" type="submit">Kapat</button>
+			</span>
+		</div>
+	</div>
+</form>`;
                 }
                 },
 
@@ -57,10 +63,10 @@
                             <span class="ti-menu"></span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="` + url('customer/' + data.id + '/policies') + `">Poliçeler</a>
-                            <a class="dropdown-item" href="` + url('customer/' + data.id + '/accounting') + `">Muhasebe</a>
+                            <a class="dropdown-item" href="` + url('customer/' + data.policy.customer.id + '/policies') + `">Poliçeler</a>
+                            <a class="dropdown-item" href="` + url('customer/' + data.policy.customer.id + '/accounting') + `">Muhasebe</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="` + url('customer/' + data.id + '/update') + `">Güncelle</a>
+                            <a class="dropdown-item" href="` + url('customer/' + data.policy.customer.id + '/update') + `">Güncelle</a>
                             <a class="dropdown-item" href="#">Sil</a>
                         </div>
                         </div>`;

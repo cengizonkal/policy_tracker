@@ -11,7 +11,6 @@ class FollowupController extends Controller
     public function index()
     {
         $followups = Followup::with('policy.customer.customerType','policy.policyType')->whereNull('resolved_at')->get();
-//        dd($followups->toJson());
         return view('followup.list')->with('followups', $followups);
     }
 
@@ -20,8 +19,7 @@ class FollowupController extends Controller
         $followup->resolved_at=Carbon::now();
         $followup->result=$request->get('result');
         $followup->save();
-
-        return redirect('followups');
+        return redirect('followup/list');
 
     }
 

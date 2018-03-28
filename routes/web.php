@@ -33,6 +33,8 @@ Route::get('/customer/{customer}/update', 'Customer\CustomerController@updateFor
 Route::post('/customer/{customer}/update', 'Customer\CustomerController@update')->middleware('auth');
 
 Route::get('/followup/list', 'FollowupController@index')->middleware('auth');
+Route::get('/followups', 'FollowupController@index')->middleware('auth');
+Route::post('/followup/{followup}/close', 'FollowupController@close')->middleware('auth');
 
 Route::get('/policy/types', 'Policy\TypeController@index')->middleware('auth');
 Route::post('/policy/types', 'Policy\TypeController@types')->middleware('auth');
