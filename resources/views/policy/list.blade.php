@@ -46,8 +46,8 @@
                             <span class="ti-menu"></span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/policies')+`">Cari</a>
-                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/accounting')+`">Muhasebe</a>
+                            <a class="dropdown-item" href="`+url('customer/'+ data.customer_id+'/policies')+`">Cari</a>
+                            <a class="dropdown-item" href="`+url('customer/'+ data.customer_id+'/accounting')+`">Muhasebe</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Güncelle</a>
                             <a class="dropdown-item" href="#">Sil</a>

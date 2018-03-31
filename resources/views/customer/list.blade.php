@@ -8,7 +8,6 @@
                     <th>ID</th>
                     <th>Adı</th>
                     <th>Soyadı</th>
-                    <th>Toplam Poliçe Sayısı</th>
                     <th>Bakiye</th>
                     <th></th>
                 </tr>
@@ -26,7 +25,6 @@
                 {"data": "id"},
                 {"data": "first_name"},
                 {"data": "last_name"},
-                {"data": "policy_count"},
                 {"data": "balance"},
                 {
                     data: null,

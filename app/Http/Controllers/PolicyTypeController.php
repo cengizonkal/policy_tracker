@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Policy;
+namespace App\Http\Controllers;
 
 use App\Models\PolicyType;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
  * Class TypeController
  * @package App\Http\Controllers\Policy
  */
-class TypeController extends Controller
+class PolicyTypeController extends Controller
 {
     public function index()
     {

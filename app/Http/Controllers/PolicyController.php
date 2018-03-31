@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Policy;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateItemRequest;
 use App\Http\Requests\CreatePolicyRequest;
 use App\Models\Customer;
 use App\Models\CustomerType;
-use App\Models\Item;
 use App\Models\Policy;
 use App\Models\PolicyCompany;
 use App\Models\PolicyType;
-use Illuminate\Http\Request;
 
-class CreateController extends Controller
+
+class PolicyController extends Controller
 {
     public function __construct()
     {
@@ -101,6 +99,32 @@ class CreateController extends Controller
         return redirect('policy/list')
             ->with('message', 'Poliçe Güncellendi');
 
+    }
+
+    public function getList()
+    {
+        $policies = Policy::with(['customer', 'policyType', 'policyCompany'])->get();
+        return view('policy.list')
+            ->with('policies', $policies);
+    }
+
+
+    public function delete(Policy $policy)
+    {
+        try {
+            \DB::beginTransaction();
+            $policy->customer->accountingRecords()->create([
+                'credit' => $policy->price
+            ]);
+            $policy->followups()->delete();
+            $policy->delete();
+            \DB::commit();
+
+        } catch (\Exception $exception) {
+            \DB::rollBack();
+            throw  $exception;
+        }
+        return redirect('policy/list')->with('message', 'Poliçe Silindi');
     }
 
 
