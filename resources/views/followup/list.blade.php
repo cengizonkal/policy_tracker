@@ -36,7 +36,7 @@
                 {"data": "policy.policy_type.name"},
                 {"data": "policy.price"},
                 {"data": "policy.valid_until"},
-                {"data": "policy.customer.customer_type.description"},
+                {"data": "policy.customer.customer_type.description","defaultContent":"Belirtilmedi"},
                 {"data": "description"},
                 {
                     "data": null, "orderable": false, render: function (data, type, row) {
