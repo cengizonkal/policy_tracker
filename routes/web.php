@@ -48,5 +48,12 @@ Route::post('/policy/types', 'PolicyTypeController@types')->middleware('auth');
 Route::post('/policy/types/{policy_type}/delete', 'PolicyTypeController@delete')->middleware('auth');
 
 
+Route::get('/accounting/list', 'AccountingController@index')->middleware('auth');
+
+Route::get('/accounting/{accounting_record}/delete', 'AccountingController@delete')->middleware('auth');
+
+Route::post('/accounting/create', 'AccountingController@create')->middleware('auth');
+
+
 
 

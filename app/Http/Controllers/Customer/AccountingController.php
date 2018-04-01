@@ -17,8 +17,8 @@ class AccountingController extends Controller
     public function add(Customer $customer, Request $request)
     {
         $customer->accountingRecords()->create([
-            'debt' => $request->get('debt'),
-            'credit' => $request->get('credit'),
+            'debt' => $request->get('debt',0),
+            'credit' => $request->get('credit',0),
             'description'=>$request->get('description'),
         ]);
         return redirect('customer/' . $customer->id . '/accounting');

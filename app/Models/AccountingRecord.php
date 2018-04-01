@@ -9,4 +9,9 @@ class AccountingRecord extends Model
 {
     use SoftDeletes;
     protected $fillable=['debt','credit','description'];
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer');
+    }
 }
