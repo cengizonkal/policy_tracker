@@ -21,6 +21,29 @@ class CustomerController extends Controller
         return view('customer.policies')->with('customer', $customer);
     }
 
+    public function create()
+    {
+
+    }
+
+    public function delete(Customer $customer)
+    {
+        try {
+            \DB::beginTransaction();
+            $customer->accountingRecords()->delete();
+            $customer->policies()->each(function ($policy) {
+                $policy->followups()->delete();
+            });
+            $customer->policies()->delete();
+            $customer->delete();
+            \DB::commit();
+            return redirect('customers')->with('message', 'Müşteri ' . $customer->full_name . ' Silindi');
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            throw $e;
+        }
+    }
+
 
     public function updateForm(Customer $customer)
     {

@@ -2,6 +2,12 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
+            <h3>Cariler</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
             <table id="customers" class="table table-sm table-hover" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -39,7 +45,7 @@
                             <a class="dropdown-item" href="`+url('customer/'+ data.id+'/accounting')+`">Muhasebe</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="`+url('customer/'+ data.id+'/update')+`">Güncelle</a>
-                            <a class="dropdown-item" href="#">Sil</a>
+                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/delete')+`">Sil</a>
                         </div>
                         </div>`;
                     }

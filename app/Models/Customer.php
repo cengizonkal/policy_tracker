@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property mixed first_name
@@ -19,8 +20,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Customer extends Model
 {
+    use SoftDeletes;
     protected $appends = ['balance', 'policy_count', 'full_name', 'total_debt', 'total_credit'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function policies()
     {
         return $this->hasMany('\App\Models\Policy');
@@ -60,5 +65,10 @@ class Customer extends Model
     public function customerType()
     {
         return $this->belongsTo('\App\Models\CustomerType');
+    }
+
+    public function followups()
+    {
+        return $this->hasManyThrough('\App\Models\Followup', '\App\Models\Policy');
     }
 }

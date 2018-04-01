@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Policy
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Policy extends Model
 {
-
+    use SoftDeletes;
     protected $fillable = ['policy_type_id'];
     protected $appends = ['total_price'];
     //protected $dates = ['valid_until'];

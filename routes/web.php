@@ -23,14 +23,19 @@ Route::post('/policy/create', 'PolicyController@create')->middleware('auth');
 Route::get('/policy/{policy}/details', 'PolicyController@details')->middleware('auth');
 Route::post('/policy/{policy}/details', 'PolicyController@saveDetails')->middleware('auth');
 
+Route::get('/policy/create_existing', 'PolicyController@showExistingForm')->middleware('auth');
+Route::post('/policy/create_existing', 'PolicyController@createExisting')->middleware('auth');
+
 Route::get('/policy/list', 'PolicyController@getList')->middleware('auth');
 
+Route::get('/customers', 'Customer\CustomerController@index')->middleware('auth');
 Route::get('/customer/list', 'Customer\CustomerController@index')->middleware('auth');
 Route::get('/customer/{customer}/policies', 'Customer\CustomerController@policies')->middleware('auth');
 Route::get('/customer/{customer}/accounting', 'Customer\AccountingController@index')->middleware('auth');
 Route::get('/customer/{customer}/accounting/add', 'Customer\AccountingController@add')->middleware('auth');
 Route::get('/customer/{customer}/update', 'Customer\CustomerController@updateForm')->middleware('auth');
 Route::post('/customer/{customer}/update', 'Customer\CustomerController@update')->middleware('auth');
+Route::get('/customer/{customer}/delete', 'Customer\CustomerController@delete')->middleware('auth');
 
 Route::get('/followup/list', 'FollowupController@index')->middleware('auth');
 Route::get('/followups', 'FollowupController@index')->middleware('auth');

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Followup extends Model
 {
     use SoftDeletes;
-    protected $dates = ['processed_at', 'deleted_at'];
+    protected $dates = ['processed_at'];
 
     public function policy()
     {

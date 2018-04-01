@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h3 >Hoşgeldiniz ...</h3>
+    <h3>Hoşgeldiniz ...</h3>
     <hr>
     <div class="row">
         <div class="col-lg-12">
@@ -10,7 +10,7 @@
                         <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
                         <div class="stat-content dib">
                             <div class="stat-text">Toplam Alacak</div>
-                            <div class="stat-digit">0</div>
+                            <div class="stat-digit">{{number_format($balance,2,'.',',')}} TL</div>
                         </div>
                     </div>
                 </div>

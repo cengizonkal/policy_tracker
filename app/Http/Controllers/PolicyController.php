@@ -9,6 +9,7 @@ use App\Models\CustomerType;
 use App\Models\Policy;
 use App\Models\PolicyCompany;
 use App\Models\PolicyType;
+use Illuminate\Http\Request;
 
 
 class PolicyController extends Controller
@@ -25,6 +26,39 @@ class PolicyController extends Controller
         return view('policy.create')
             ->with('customerTypes', $customerTypes)
             ->with('policyTypes', $policyTypes);
+    }
+
+    public function showExistingForm()
+    {
+        $policyTypes = PolicyType::all();
+        $customers = Customer::all();
+        return view('policy.create_existing')
+            ->with('customers', $customers)
+            ->with('policyTypes', $policyTypes);
+    }
+
+    public function createExisting(Request $request)
+    {
+        try {
+            \DB::beginTransaction();
+
+
+            /** @var Customer $customer */
+            $customer = Customer::findOrFail($request->get('customer_id'));
+
+            /** @var Policy $policy */
+            $policy = $customer->policies()->create([
+                'policy_type_id' => $request->get('policy_type_id')
+            ]);
+            \DB::commit();
+            return redirect('policy/' . $policy->id . '/details')
+                ->with('message', 'Poliçe oluşturuldu');
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            throw $e;
+        }
+
+
     }
 
 
