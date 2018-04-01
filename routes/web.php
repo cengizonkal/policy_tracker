@@ -23,6 +23,8 @@ Route::post('/policy/create', 'PolicyController@create')->middleware('auth');
 Route::get('/policy/{policy}/details', 'PolicyController@details')->middleware('auth');
 Route::post('/policy/{policy}/details', 'PolicyController@saveDetails')->middleware('auth');
 
+Route::get('/policy/{policy}/delete', 'PolicyController@delete')->middleware('auth');
+
 Route::get('/policy/create_existing', 'PolicyController@showExistingForm')->middleware('auth');
 Route::post('/policy/create_existing', 'PolicyController@createExisting')->middleware('auth');
 
