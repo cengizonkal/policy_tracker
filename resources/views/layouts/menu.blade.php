@@ -34,7 +34,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="menu-icon fa fa-money"></i>Muhasebe</a>
             <ul class="sub-menu children dropdown-menu">
-                <li><i class="fa fa-list"></i><a href="{{url('accounting/list')}}">Liste</a></li>
+                <li><i class="fa fa-list"></i><a href="{{url('accounting/list')}}">Hareketler</a></li>
+                <li><i class="fa fa-list"></i><a href="{{url('accounting/summary')}}">Liste</a></li>
             </ul>
         </li>
 

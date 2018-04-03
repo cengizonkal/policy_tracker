@@ -53,6 +53,7 @@ Route::get('/accounting/list', 'AccountingController@index')->middleware('auth')
 Route::get('/accounting/{accounting_record}/delete', 'AccountingController@delete')->middleware('auth');
 
 Route::post('/accounting/create', 'AccountingController@create')->middleware('auth');
+Route::get('/accounting/summary', 'AccountingController@summary')->middleware('auth');
 
 
 

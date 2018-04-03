@@ -33,4 +33,12 @@ class AccountingController extends Controller
         ]);
         return redirect('accounting/list');
     }
+
+    public function summary()
+    {
+        $customers = Customer::all();
+
+        return view('accounting.summary')
+            ->with('customers', $customers);
+    }
 }
