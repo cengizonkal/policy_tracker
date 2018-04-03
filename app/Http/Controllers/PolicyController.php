@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateItemRequest;
+use App\Http\Requests\UpdatePolicyDetailsRequest;
 use App\Http\Requests\CreatePolicyRequest;
 use App\Models\Customer;
 use App\Models\CustomerType;
@@ -102,7 +102,7 @@ class PolicyController extends Controller
     }
 
 
-    public function saveDetails(Policy $policy, CreateItemRequest $createItemRequest)
+    public function saveDetails(Policy $policy, UpdatePolicyDetailsRequest $createItemRequest)
     {
         try {
             \DB::beginTransaction();
@@ -116,8 +116,9 @@ class PolicyController extends Controller
                 $policy->features = $features;
             }
             $policy->price = $createItemRequest->get('price');
-            $policy->start_at = $createItemRequest->get('valid_until');
+            $policy->start_at = $createItemRequest->get('start_at');
             $policy->valid_until = $createItemRequest->get('valid_until');
+            $policy->policy_company_id = $createItemRequest->get('policy_company_id');
             $policy->save();
             if ($policy->customer->customerType->is_accountable) {
                 $policy->customer->accountingRecords()->create([

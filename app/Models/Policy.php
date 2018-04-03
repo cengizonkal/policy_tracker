@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed start_at
  * @property mixed valid_until
  * @property mixed customer_id
+ * @property int policy_company_id
  * @package App\Models
  */
 class Policy extends Model
