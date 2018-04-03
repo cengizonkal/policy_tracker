@@ -122,7 +122,8 @@ class PolicyController extends Controller
             $policy->save();
             if ($policy->customer->customerType->is_accountable) {
                 $policy->customer->accountingRecords()->create([
-                    'debt' => $createItemRequest->get('price')
+                    'debt' => $createItemRequest->get('price'),
+                    'description' => 'Oluşturulan poliçe yüzünden eklenmiştir'
                 ]);
             }
 
@@ -149,7 +150,9 @@ class PolicyController extends Controller
         try {
             \DB::beginTransaction();
             $policy->customer->accountingRecords()->create([
-                'credit' => $policy->price
+                'credit' => $policy->price,
+                'description' => 'Silinen Poliçe Yüzünden Eklenmiştir'
+
             ]);
             $policy->followups()->delete();
             $policy->delete();
