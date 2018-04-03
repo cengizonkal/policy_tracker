@@ -65,7 +65,7 @@
                             <span class="ti-menu"></span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="`+url('customer/'+ data.id+'/policies')+`">Sil</a>
+                            <a class="dropdown-item" href="` + url('accounting/' + data.id + '/delete') + `">Sil</a>
                         </div>
                         </div>`;
                     }
