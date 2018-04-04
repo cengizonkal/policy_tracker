@@ -13,13 +13,15 @@ class CreateUserCommand extends Command
 
     public function handle()
     {
-        $email=$this->ask('Enter User Email');
-        $password=$this->ask('Enter Password');
-        $validator = \Validator::make(['email'=>$email], [
+        $name = $this->ask('Enter Name');
+        $email = $this->ask('Enter User Email');
+        $password = $this->ask('Enter Password');
+
+        $validator = \Validator::make(['email' => $email], [
             'email' => 'required|email',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $this->output->writeln($validator->errors()->toJson());
             exit("bye..\n");
         }
@@ -27,6 +29,7 @@ class CreateUserCommand extends Command
         $user = new \App\User();
         $user->password = \Hash::make($password);
         $user->email = $email;
+        $user->name = $name;
         $user->save();
         $this->output->writeln('User Created');
     }
