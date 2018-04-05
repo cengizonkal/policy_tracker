@@ -57,4 +57,9 @@ class Policy extends Model
         return $this->hasMany('\App\Models\Followup');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('valid_until', '>', Carbon::today()->startOfDay());
+    }
+
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PolicyCompany extends Model
 {
     use SoftDeletes;
-    public function policy()
+    public function policies()
     {
         return $this->hasMany('\App\Models\Policy');
     }
