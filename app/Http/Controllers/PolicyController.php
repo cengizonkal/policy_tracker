@@ -124,6 +124,7 @@ class PolicyController extends Controller
             if ($policy->customer->customerType->is_accountable) {
                 $policy->customer->accountingRecords()->create([
                     'debt' => $createItemRequest->get('price'),
+                    'credit' => $createItemRequest->get('discount'),
                     'description' => 'Oluşturulan poliçe yüzünden eklenmiştir'
                 ]);
             }
