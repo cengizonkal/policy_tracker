@@ -116,6 +116,7 @@ class PolicyController extends Controller
                 $policy->features = $features;
             }
             $policy->price = $createItemRequest->get('price');
+            $policy->discount = $createItemRequest->get('discount');
             $policy->start_at = $createItemRequest->get('start_at');
             $policy->valid_until = $createItemRequest->get('valid_until');
             $policy->policy_company_id = $createItemRequest->get('policy_company_id');

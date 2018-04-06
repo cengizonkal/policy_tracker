@@ -25,9 +25,12 @@
                             <div class=" col-md-3"><label
                                         class=" form-control-label">Poliçe Tutarı</label></div>
                             <div class="col-md-4">
-                                <input name="price" type="number" id="text-input" class="form-control form-control-sm">
+                                <input name="price" type="number" class="form-control form-control-sm " placeholder="Tutar">
                             </div>
-
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <input name="discount" type="number" class="form-control form-control-sm " placeholder="İndirim" value="0">
+                            </div>
                         </div>
                         <div class="row form-group">
                             <div class=" col-md-3"><label

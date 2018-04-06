@@ -17,6 +17,7 @@
                     <th>Poliçe Türü</th>
                     <th>Poliçe Şirketi</th>
                     <th>Poliçe Tutarı</th>
+                    <th>İndirim</th>
                     <th>Başlangıç Tarihi</th>
                     <th>Bitiş Tarihi</th>
                     <th></th>
@@ -41,6 +42,7 @@
                 {"data": "policy_type.name"},
                 {"data": "policy_company.title", "defaultContent": "Belirtilmedi"},
                 {"data": "total_price"},
+                {"data": "discount"},
                 {"data": "start_at"},
                 {"data": "valid_until"},
                 {
