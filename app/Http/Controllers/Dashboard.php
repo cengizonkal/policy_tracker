@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountingRecord;
+use App\Models\Policy;
+use App\Models\PolicyCompany;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -17,6 +19,11 @@ class Dashboard extends Controller
     {
         $totalDebt = AccountingRecord::all()->sum('debt');
         $totalCredit = AccountingRecord::all()->sum('credit');
-        return view('home')->with('balance', $totalDebt - $totalCredit);
+        $policies = Policy::active()->get();
+        $policyCompanies = PolicyCompany::all();
+        return view('home')
+            ->with('balance', $totalDebt - $totalCredit)
+            ->with('policyCompanies', $policyCompanies)
+            ->with('policies', $policies);
     }
 }

@@ -6,7 +6,7 @@
         <h3 class="menu-title">Poliçeler</h3><!-- /.menu-title -->
         <li class="menu-item-has-children dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="menu-icon fa fa-users"></i>Cariler</a>
+                <i class="menu-icon fa fa-users"></i>Müşteriler</a>
             <ul class="sub-menu children dropdown-menu">
                 <li><i class="fa fa-id-badge"></i><a href="{{url('policy/create')}}">Oluştur</a></li>
                 <li><i class="fa fa-id-badge"></i><a href="{{url('customer/list')}}">Liste</a></li>
