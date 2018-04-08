@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdatePolicyDetailsRequest;
 use App\Http\Requests\CreatePolicyRequest;
+use App\Http\Requests\UpdatePolicyRequest;
 use App\Models\Customer;
 use App\Models\CustomerType;
 use App\Models\Policy;
@@ -102,29 +103,29 @@ class PolicyController extends Controller
     }
 
 
-    public function saveDetails(Policy $policy, UpdatePolicyDetailsRequest $createItemRequest)
+    public function saveDetails(Policy $policy, UpdatePolicyDetailsRequest $updatePolicyRequest)
     {
         try {
             \DB::beginTransaction();
 
             $features = [];
             foreach ($policy->policyType->features as $feature) {
-                $features[$feature['name']] = $createItemRequest->get($feature['name']);
+                $features[$feature['name']] = $updatePolicyRequest->get($feature['name']);
             }
-
             if (!empty($features)) {
                 $policy->features = $features;
             }
-            $policy->price = $createItemRequest->get('price');
-            $policy->discount = $createItemRequest->get('discount');
-            $policy->start_at = $createItemRequest->get('start_at');
-            $policy->valid_until = $createItemRequest->get('valid_until');
-            $policy->policy_company_id = $createItemRequest->get('policy_company_id');
+            $policy->price = $updatePolicyRequest->get('price');
+            $policy->discount = $updatePolicyRequest->get('discount');
+            $policy->start_at = $updatePolicyRequest->get('start_at');
+            $policy->valid_until = $updatePolicyRequest->get('valid_until');
+            $policy->policy_company_id = $updatePolicyRequest->get('policy_company_id');
+            $policy->description = $updatePolicyRequest->get('description');
             $policy->save();
             if ($policy->customer->customerType->is_accountable) {
                 $policy->customer->accountingRecords()->create([
-                    'debt' => $createItemRequest->get('price'),
-                    'credit' => $createItemRequest->get('discount'),
+                    'debt' => $updatePolicyRequest->get('price'),
+                    'credit' => $updatePolicyRequest->get('discount'),
                     'description' => 'Oluşturulan poliçe yüzünden eklenmiştir'
                 ]);
             }
@@ -153,6 +154,7 @@ class PolicyController extends Controller
             \DB::beginTransaction();
             $policy->customer->accountingRecords()->create([
                 'credit' => $policy->price,
+                'debt' => $policy->discount,
                 'description' => 'Silinen Poliçe Yüzünden Eklenmiştir'
 
             ]);
@@ -165,6 +167,62 @@ class PolicyController extends Controller
             throw  $exception;
         }
         return redirect('policy/list')->with('message', 'Poliçe Silindi');
+    }
+
+    public function edit(Policy $policy)
+    {
+        $policyCompanies = PolicyCompany::all();
+
+        return view('policy.edit')
+            ->with('policyCompanies', $policyCompanies)
+            ->with('policy', $policy);
+    }
+
+    public function update(Policy $policy, UpdatePolicyRequest $request)
+    {
+        try {
+            \DB::beginTransaction();
+
+            // update policy accounts
+            if ($policy->customer->customerType->is_accountable) {
+                $policy->customer->accountingRecords()->create([
+                    'credit' => $request->get('price'),
+                    'debt' => $request->get('discount'),
+                    'description' => 'Güncellenen poliçe için düzeltme olarak girilmiştir.'
+                ]);
+            }
+
+            $policy->price = $request->get('price');
+            $policy->discount = $request->get('discount');
+            $policy->start_at = $request->get('start_at');
+            $policy->valid_until = $request->get('valid_until');
+            $policy->policy_company_id = $request->get('policy_company_id');
+            $policy->description = $request->get('description');
+            $features = [];
+            foreach ($policy->policyType->features as $feature) {
+                $features[$feature['name']] = $request->get($feature['name']);
+            }
+            if (!empty($features)) {
+                $policy->features = $features;
+            }
+
+            if ($policy->customer->customerType->is_accountable) {
+                $policy->customer->accountingRecords()->create([
+                    'debt' => $request->get('price'),
+                    'credit' => $request->get('discount'),
+                    'description' => 'Güncellenen yeni poliçe için eklenmiştir'
+                ]);
+            }
+
+            $policy->save();
+
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            throw  $e;
+        }
+
+        return redirect('policy/' . $policy->id . '/edit')->with('message', 'Poliçe Güncellendi');
     }
 
 

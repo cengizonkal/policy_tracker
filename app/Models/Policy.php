@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed customer_id
  * @property int policy_company_id
  * @property mixed discount
+ * @property string description
  * @package App\Models
  */
 class Policy extends Model
@@ -25,7 +26,7 @@ class Policy extends Model
     use SoftDeletes;
     protected $fillable = ['policy_type_id'];
     protected $appends = ['total_price'];
-    //protected $dates = ['valid_until'];
+    protected $dates = ['valid_until','start_at'];
     protected $casts = ['features' => 'array'];
 
     public function policyCompany()

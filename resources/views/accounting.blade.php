@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <table id="policies" class="table" cellspacing="0" width="100%">
+            <table id="policies" class="table table-sm table-hover" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>ID</th>

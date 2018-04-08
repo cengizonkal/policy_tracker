@@ -57,7 +57,7 @@
                             <a class="dropdown-item" href="` + url('customer/' + data.customer_id + '/policies') + `">Cari</a>
                             <a class="dropdown-item" href="` + url('customer/' + data.customer_id + '/accounting') + `">Muhasebe</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Güncelle</a>
+                            <a class="dropdown-item" href="` + url('policy/' + data.id + '/edit') + `">Güncelle</a>
                             <a class="dropdown-item" onclick="return confirm('Are you sure?')" href="` + url('policy/' + data.id + '/delete') + `" >Sil</a>
                         </div>
                         </div>`;
