@@ -52,7 +52,7 @@
         @endforeach
     </div>
     <hr>
-<h3>Aylık ({{\Carbon\Carbon::today()->startOfMonth()->format('d/m/Y')}} - {{\Carbon\Carbon::today()->endOfMonth()->format('d/m/Y')}})</h3>
+<h3>{{\Carbon\Carbon::today()->startOfMonth()->formatLocalized('%B')}} Ayı İçin</h3>
     <hr>
     <div class="row">
 
