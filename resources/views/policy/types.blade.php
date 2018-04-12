@@ -3,7 +3,7 @@
     <script src="{{asset('datatables/Buttons-1.5.1/js/buttons.html5.js')}}"></script>
     <br>
     <br>
-    <table id="types" class="table" cellspacing="0" width="100%">
+    <table id="types" class="table table-sm table-hover" cellspacing="0" width="100%">
         <thead>
         <tr>
             <th>ID</th>

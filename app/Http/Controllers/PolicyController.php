@@ -186,9 +186,8 @@ class PolicyController extends Controller
             // update policy accounts
             if ($policy->customer->customerType->is_accountable) {
                 $policy->customer->accountingRecords()->create([
-                    'credit' => $request->get('price'),
-                    'debt' => $request->get('discount'),
-                    'description' => 'Güncellenen poliçe için düzeltme olarak girilmiştir.'
+                    'credit' => $request->get('price') -  $request->get('discount'),
+                    'description' => 'Güncellenen poliçe için düzeltme olarak eklenmiştir.'
                 ]);
             }
 
@@ -208,8 +207,7 @@ class PolicyController extends Controller
 
             if ($policy->customer->customerType->is_accountable) {
                 $policy->customer->accountingRecords()->create([
-                    'debt' => $request->get('price'),
-                    'credit' => $request->get('discount'),
+                    'debt' => $request->get('price') - $request->get('discount'),
                     'description' => 'Güncellenen yeni poliçe için eklenmiştir'
                 ]);
             }
