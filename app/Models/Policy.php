@@ -26,7 +26,7 @@ class Policy extends Model
     use SoftDeletes;
     protected $fillable = ['policy_type_id'];
     protected $appends = ['total_price'];
-    protected $dates = ['valid_until','start_at'];
+    protected $dates = ['valid_until', 'start_at'];
     protected $casts = ['features' => 'array'];
 
     public function policyCompany()
@@ -63,5 +63,12 @@ class Policy extends Model
     {
         return $query->where('valid_until', '>', Carbon::today()->startOfDay());
     }
+
+    public function scopeMonthly($query)
+    {
+        return $query->where('start_at', '>', Carbon::today()->startOfMonth()->startOfDay())
+            ->where('start_at', '<', Carbon::today()->endOfMonth()->endOfDay());
+    }
+
 
 }

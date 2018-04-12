@@ -31,8 +31,8 @@
         </div>
     </div>
 
-        <div class="row">
-            @foreach($policyCompanies as $policyCompany)
+    <div class="row">
+        @foreach($policyCompanies as $policyCompany)
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
@@ -41,15 +41,39 @@
                             <div class="stat-content dib">
                                 <div class="stat-text">{{$policyCompany->title}}</div>
                                 <div class="stat-digit">
-                                        {{number_format($policyCompany->policies()->sum('price'),2)}} TL
+                                    {{number_format($policyCompany->policies()->sum('price'),2)}} TL
                                 </div>
-                                <div class="stat-text">{{$policyCompany->policies()->active()->count()}}</div>
+                                <div class="stat-text">Toplam:{{$policyCompany->policies()->count()}}, İndirim:{{number_format($policyCompany->policies()->sum('discount'),2)}} TL</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div>
+        @endforeach
+    </div>
+    <hr>
+<h3>Aylık ({{\Carbon\Carbon::today()->startOfMonth()->format('d/m/Y')}} - {{\Carbon\Carbon::today()->endOfMonth()->format('d/m/Y')}})</h3>
+    <hr>
+    <div class="row">
 
+
+        @foreach($policyCompanies as $policyCompany)
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-check text-warning border-warning"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">{{$policyCompany->title}}</div>
+                                <div class="stat-digit">
+                                    {{number_format($policyCompany->policies()->monthly()->sum('price'),2)}} TL
+                                </div>
+                                <div class="stat-text">Toplam:{{$policyCompany->policies()->monthly()->count()}}, İndirim:{{number_format($policyCompany->policies()->monthly()->sum('discount'),2)}} TL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @stop
