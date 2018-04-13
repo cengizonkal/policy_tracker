@@ -13,7 +13,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Adı</th>
-                    <th>Soyadı</th>
+                    <th>Tip</th>
                     <th>Poliçe Türü</th>
                     <th>Poliçe Şirketi</th>
                     <th>Poliçe Tutarı</th>
@@ -37,8 +37,8 @@
             },
             "columns": [
                 {"data": "id"},
-                {"data": "customer.first_name"},
-                {"data": "customer.last_name"},
+                {"data": "customer.full_name"},
+                {"data": "customer.customer_type.description"},
                 {"data": "policy_type.name"},
                 {"data": "policy_company.title", "defaultContent": "Belirtilmedi"},
                 {"data": "total_price"},

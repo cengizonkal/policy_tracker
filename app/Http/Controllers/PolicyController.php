@@ -142,7 +142,7 @@ class PolicyController extends Controller
 
     public function getList()
     {
-        $policies = Policy::with(['customer', 'policyType', 'policyCompany'])->get();
+        $policies = Policy::with(['customer.customerType', 'policyType', 'policyCompany'])->get();
         return view('policy.list')
             ->with('policies', $policies);
     }

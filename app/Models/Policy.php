@@ -51,7 +51,7 @@ class Policy extends Model
 
     protected function serializeDate(\DateTimeInterface $date)
     {
-        return $date->format('d-m-Y H:i:s'); // Use your own format here
+        return $date->format('d-m-Y'); // Use your own format here
     }
 
     public function followups()
