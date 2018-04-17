@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <div class="row">
+        <div class="col-lg-12">
+            <h3>Poliçe Şirketleri</h3>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-lg-6">
             <form action="{{url('policy/create')}}" method="post" novalidate="novalidate">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">

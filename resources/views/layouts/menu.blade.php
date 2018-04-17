@@ -26,7 +26,6 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="menu-icon fa fa-sticky-note"></i>Takip</a>
             <ul class="sub-menu children dropdown-menu">
-                <li><i class="fa fa-id-badge"></i><a href="{{url('followup/create')}}">Yeni Takip</a></li>
                 <li><i class="fa fa-id-badge"></i><a href="{{url('followup/list')}}">Takip Listesi</a></li>
 
             </ul>
@@ -37,6 +36,13 @@
             <ul class="sub-menu children dropdown-menu">
                 <li><i class="fa fa-list"></i><a href="{{url('accounting/list')}}">Hareketler</a></li>
                 <li><i class="fa fa-list"></i><a href="{{url('accounting/summary')}}">Liste</a></li>
+            </ul>
+        </li>
+        <li class="menu-item-has-children dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="menu-icon fa fa-question"></i>Raporlar</a>
+            <ul class="sub-menu children dropdown-menu">
+                <li><i class="fa fa-list"></i><a href="{{url('reports/policy_company')}}">Poliçe Şirketleri</a></li>
             </ul>
         </li>
 

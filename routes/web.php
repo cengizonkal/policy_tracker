@@ -57,6 +57,11 @@ Route::get('/accounting/{accounting_record}/delete', 'AccountingController@delet
 Route::post('/accounting/create', 'AccountingController@create')->middleware('auth');
 Route::get('/accounting/summary', 'AccountingController@summary')->middleware('auth');
 
+Route::get('/reports/policy_company', 'Reports\PolicyCompany@index')->middleware('auth');
+Route::get('/reports/policy_company/filter', 'Reports\PolicyCompany@filter')->middleware('auth');
+
+
+
 
 
 
