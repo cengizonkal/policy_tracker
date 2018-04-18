@@ -26,9 +26,9 @@
                     <tr>
                         <td>{{$company->id}}</td>
                         <td>{{$company->title}}</td>
-                        <td>{{$company->policies->where('start_at','>=',$request->get('from_date'))->where('start_at','<=',$request->get('to_date'))->count()}}</td>
-                        <td>{{$company->policies->where('start_at','>=',$request->get('from_date'))->where('start_at','<=',$request->get('to_date'))->sum('discount')}}</td>
-                        <td>{{$company->policies->where('start_at','>=',$request->get('from_date'))->where('start_at','<=',$request->get('to_date'))->sum('price')}}</td>
+                        <td>{{$company->policies()->accountable()->where('start_at','>=',$request->get('from_date'))->where('start_at','<=',$request->get('to_date'))->count()}}</td>
+                        <td>{{$company->policies()->accountable()->where('start_at','>=',$request->get('from_date'))->where('start_at','<=',$request->get('to_date'))->sum('discount')}}</td>
+                        <td>{{$company->policies()->accountable()->where('start_at','>=',$request->get('from_date'))->where('start_at','<=',$request->get('to_date'))->sum('price')}}</td>
                     </tr>
                 @endforeach
                 </tbody>

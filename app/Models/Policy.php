@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int policy_company_id
  * @property mixed discount
  * @property string description
+ * @property int is_accountable
  * @package App\Models
  */
 class Policy extends Model
@@ -68,6 +69,11 @@ class Policy extends Model
     {
         return $query->where('start_at', '>', Carbon::today()->startOfMonth()->startOfDay())
             ->where('start_at', '<', Carbon::today()->endOfMonth()->endOfDay());
+    }
+
+    public function scopeAccountable($query)
+    {
+        return $query->where('is_accountable', 1);
     }
 
 

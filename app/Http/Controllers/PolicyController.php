@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\CustomerTypes;
 use App\Http\Requests\UpdatePolicyDetailsRequest;
 use App\Http\Requests\CreatePolicyRequest;
 use App\Http\Requests\UpdatePolicyRequest;
@@ -51,6 +52,11 @@ class PolicyController extends Controller
             $policy = $customer->policies()->create([
                 'policy_type_id' => $request->get('policy_type_id')
             ]);
+
+            //make customer active
+            $customer->customer_type_id = CustomerTypes::ACTIVE;
+            $customer->save();
+
             \DB::commit();
             return redirect('policy/' . $policy->id . '/details')
                 ->with('message', 'Poliçe oluşturuldu');
@@ -121,6 +127,7 @@ class PolicyController extends Controller
             $policy->valid_until = $updatePolicyRequest->get('valid_until');
             $policy->policy_company_id = $updatePolicyRequest->get('policy_company_id');
             $policy->description = $updatePolicyRequest->get('description');
+            $policy->is_accountable = $policy->customer->customerType->is_accountable;
             $policy->save();
             if ($policy->customer->customerType->is_accountable) {
                 $policy->customer->accountingRecords()->create([

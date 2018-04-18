@@ -41,9 +41,9 @@
                             <div class="stat-content dib">
                                 <div class="stat-text">{{$policyCompany->title}}</div>
                                 <div class="stat-digit">
-                                    {{number_format($policyCompany->policies()->sum('price'),2)}} TL
+                                    {{number_format($policyCompany->policies()->accountable()->sum('price'),2)}} TL
                                 </div>
-                                <div class="stat-text">Toplam:{{$policyCompany->policies()->count()}}, İndirim:{{number_format($policyCompany->policies()->sum('discount'),2)}} TL</div>
+                                <div class="stat-text">Toplam:{{$policyCompany->policies()->accountable()->count()}}, İndirim:{{number_format($policyCompany->policies()->accountable()->sum('discount'),2)}} TL</div>
                             </div>
                         </div>
                     </div>
@@ -66,9 +66,9 @@
                             <div class="stat-content dib">
                                 <div class="stat-text">{{$policyCompany->title}}</div>
                                 <div class="stat-digit">
-                                    {{number_format($policyCompany->policies()->monthly()->sum('price'),2)}} TL
+                                    {{number_format($policyCompany->policies()->accountable()->monthly()->sum('price'),2)}} TL
                                 </div>
-                                <div class="stat-text">Toplam:{{$policyCompany->policies()->monthly()->count()}}, İndirim:{{number_format($policyCompany->policies()->monthly()->sum('discount'),2)}} TL</div>
+                                <div class="stat-text">Toplam:{{$policyCompany->policies()->accountable()->monthly()->count()}}, İndirim:{{number_format($policyCompany->policies()->accountable()->monthly()->sum('discount'),2)}} TL</div>
                             </div>
                         </div>
                     </div>
