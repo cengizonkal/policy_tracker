@@ -13,13 +13,14 @@
                 <tr>
                     <th>ID</th>
                     <th>Adı</th>
-                    <th>Tip</th>
+                    <th>Müşteri Tipi</th>
                     <th>Poliçe Türü</th>
                     <th>Poliçe Şirketi</th>
                     <th>Poliçe Tutarı</th>
                     <th>İndirim</th>
                     <th>Başlangıç Tarihi</th>
                     <th>Bitiş Tarihi</th>
+                    <th>P/A</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -45,6 +46,7 @@
                 {"data": "discount"},
                 {"data": "start_at"},
                 {"data": "valid_until"},
+                {"data": "accountable"},
                 {
                     data: null,
                     "orderable": false,

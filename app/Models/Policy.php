@@ -26,7 +26,7 @@ class Policy extends Model
 {
     use SoftDeletes;
     protected $fillable = ['policy_type_id'];
-    protected $appends = ['total_price'];
+    protected $appends = ['total_price','accountable'];
     protected $dates = ['valid_until', 'start_at'];
     protected $casts = ['features' => 'array'];
 
@@ -74,6 +74,11 @@ class Policy extends Model
     public function scopeAccountable($query)
     {
         return $query->where('is_accountable', 1);
+    }
+
+    public function getAccountableAttribute()
+    {
+        return $this->is_accountable?'Aktif':'Pasif';
     }
 
 
