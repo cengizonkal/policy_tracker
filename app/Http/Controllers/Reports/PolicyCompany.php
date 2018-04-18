@@ -17,6 +17,8 @@ class PolicyCompany extends Controller
     public function filter(Request $request)
     {
         $companies = \App\Models\PolicyCompany::all();
-        return view('reports.policy_company.result')->with('companies', $companies);
+        return view('reports.policy_company.result')
+            ->with('request', $request)
+            ->with('companies', $companies);
     }
 }

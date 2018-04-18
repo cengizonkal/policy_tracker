@@ -16,12 +16,12 @@
                                     <div class="col col-md-3"><label
                                                 class=" form-control-label">Başlangıç - Bitiş</label></div>
                                     <div class="col-md-4">
-                                        <input type="date" name="start_at" class="form-control form-control-sm"
+                                        <input type="date" name="from_date" class="form-control form-control-sm"
                                                value="{{\Carbon\Carbon::today()->toDateString()}}">
                                     </div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-4">
-                                        <input type="date" name="end_at" class="form-control form-control-sm"
+                                        <input type="date" name="to_date" class="form-control form-control-sm"
                                                value="{{\Carbon\Carbon::today()->addYear()->toDateString()}}" required>
                                     </div>
                                 </div>
