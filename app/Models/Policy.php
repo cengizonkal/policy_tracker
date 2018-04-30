@@ -67,7 +67,7 @@ class Policy extends Model
 
     public function scopeMonthly($query)
     {
-        return $query->where('start_at', '>', Carbon::today()->startOfMonth()->startOfDay())
+        return $query->where('start_at', '>=', Carbon::today()->startOfMonth()->startOfDay())
             ->where('start_at', '<', Carbon::today()->endOfMonth()->endOfDay());
     }
 

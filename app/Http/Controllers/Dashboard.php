@@ -19,7 +19,7 @@ class Dashboard extends Controller
     {
         $totalDebt = AccountingRecord::all()->sum('debt');
         $totalCredit = AccountingRecord::all()->sum('credit');
-        $policies = Policy::active()->get();
+        $policies = Policy::active()->accountable()->get();
         $policyCompanies = PolicyCompany::all();
         return view('home')
             ->with('balance', $totalDebt - $totalCredit)

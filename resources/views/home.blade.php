@@ -55,8 +55,6 @@
 <h3>{{\Carbon\Carbon::today()->startOfMonth()->formatLocalized('%B')}} Ayı İçin</h3>
     <hr>
     <div class="row">
-
-
         @foreach($policyCompanies as $policyCompany)
             <div class="col-md-3">
                 <div class="card">
