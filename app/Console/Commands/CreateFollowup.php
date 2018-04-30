@@ -24,9 +24,8 @@ class CreateFollowup extends Command
         /** @var Policy[] $policies */
         $policies = Policy::where('valid_until', '<=', Carbon::today()->addDays(env('FOLLOWUP_DAY',3)))
             ->where('valid_until', '>', Carbon::today()->startOfDay())
-            ->whereDoesntHave('followups', function ($query) {
-                $query->whereNull('resolved_at');
-            })->get();
+            ->whereDoesntHave('followups')
+            ->get();
 
         foreach ($policies as $policy) {
             $followup = new Followup();
