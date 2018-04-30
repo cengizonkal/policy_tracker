@@ -2,10 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\FollowupMail;
 use App\Models\Followup;
 use App\Models\Policy;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class CreateFollowup extends Command
 {
@@ -31,6 +34,9 @@ class CreateFollowup extends Command
             $followup->description = 'Poliçe süresi bitmek üzere';
             $followup->customer_id = $policy->customer_id;
             $followup->save();
+        }
+        if(!empty($policies)){
+            Mail::to(User::all())->send(new FollowupMail($policies));
         }
     }
 }
