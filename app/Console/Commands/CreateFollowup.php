@@ -34,7 +34,9 @@ class CreateFollowup extends Command
             $followup->customer_id = $policy->customer_id;
             $followup->save();
         }
-        if(!empty($policies)){
+
+        $policies=Policy::has('followups')->get();
+        if(count($policies)){
             Mail::to(User::all())->send(new FollowupMail($policies));
         }
     }
