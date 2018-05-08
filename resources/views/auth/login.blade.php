@@ -34,9 +34,7 @@
     <div class="container">
         <div class="login-content">
             <div class="login-logo">
-                <a href="index.html">
-                    <img class="align-content" src="{{asset('images/logo.png')}}" alt="">
-                </a>
+                <h4 class="text-white title"><strong>Hunter</strong> Insurance</h4>
             </div>
             <div class="login-form">
                 <form class="form-horizontal" method="POST" action="{{ route('login') }}">
