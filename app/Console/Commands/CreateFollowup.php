@@ -22,7 +22,7 @@ class CreateFollowup extends Command
     {
 
         /** @var Policy[] $policies */
-        $policies = Policy::where('valid_until', '<=', Carbon::today()->addDays(env('FOLLOWUP_DAY',3)))
+        $policies = Policy::where('valid_until', '<=', Carbon::today()->addDays(env('FOLLOWUP_DAY', 3)))
             ->where('valid_until', '>', Carbon::today()->startOfDay())
             ->whereDoesntHave('followups')
             ->get();
@@ -35,8 +35,11 @@ class CreateFollowup extends Command
             $followup->save();
         }
 
-        $policies=Policy::has('followups')->get();
-        if(count($policies)){
+        $policies = Policy::has('followups', function ($query) {
+            $query->whereNull('resolved_at');
+        })->get();
+
+        if (count($policies)) {
             Mail::to(User::all())->send(new FollowupMail($policies));
         }
     }
