@@ -35,7 +35,7 @@ class CreateFollowup extends Command
             $followup->save();
         }
 
-        $policies = Policy::has('followups', function ($query) {
+        $policies = Policy::whereHas('followups', function ($query) {
             $query->whereNull('resolved_at');
         })->get();
 
